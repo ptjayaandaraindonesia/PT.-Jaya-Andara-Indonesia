@@ -1,0 +1,316 @@
+<!DOCTYPE html>  
+<html lang="id">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  
+  <title>PT. Jaya Andara Indonesia</title>  
+  
+  <!-- Google Font -->  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">  
+  <!-- Font Awesome -->  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+  
+  <style>  
+    :root{
+      --gold:#D4AF37;
+      --gold-dark:#B7912D;
+      --blue:#0A1F33;
+      --dark:#0A0F18;
+      --muted:#6b7280;
+      --container:1200px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:#f4f4f4;color:#111;line-height:1.45}
+
+    /* Header */
+    header{
+      position:fixed;top:0;left:0;right:0;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 30px;background:var(--blue);border-bottom:3px solid var(--gold);z-index:120;
+    }
+    .logo{display:flex;align-items:center;gap:14px}
+    .logo img{height:72px;object-fit:contain}
+    .text-title{color:#fff;font-weight:700;font-size:20px}
+    nav a{color:#fff;text-decoration:none;margin-left:22px;font-weight:600}
+    nav a:hover{color:var(--gold)}
+
+    main{padding-top:120px}
+
+    /* Hero */
+    .hero{min-height:70vh;background:url("look-.jpg") center/cover no-repeat;display:flex;align-items:center;position:relative}
+    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.55)}
+    .hero-content{position:relative;z-index:3;max-width:var(--container);margin:0 auto;padding:36px;color:#fff}
+    .hero-content h1{font-size:44px;margin-bottom:12px;line-height:1.05;text-shadow:0 4px 10px rgba(0,0,0,.5)}
+    .hero-content p{font-size:17px;width:70%;opacity:0.95;margin-bottom:18px}
+    .btn{background:var(--gold);color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block}
+    .btn:hover{background:var(--gold-dark)}
+
+    /* Container & titles */
+    .container{max-width:var(--container);margin:0 auto;padding:44px 30px}
+    .section-title{font-size:28px;color:var(--blue);font-weight:700;margin-bottom:18px;text-transform:uppercase;position:relative}
+    .section-title:after{content:"";width:80px;height:4px;background:var(--gold);position:absolute;left:0;bottom:-10px;border-radius:2px}
+
+    /* About */
+    .about-single{
+      max-width:800px;
+      margin:0 auto;
+      color:#444;
+      line-height:1.6;
+      font-size:16px;
+    }
+    .about-single h3{
+      color:var(--blue);
+      margin:20px 0 6px;
+      font-size:20px;
+      font-weight:700;
+    }
+    .about-single ul{
+      margin-left:20px;
+      line-height:1.6;
+    }
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+    .project-item{background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);box-shadow:0 6px 14px rgba(0,0,0,0.06);transition:transform .25s,box-shadow .25s;cursor:pointer;text-decoration:none;color:inherit}
+    .project-item:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,0,0,0.12)}
+    .project-item img{width:100%;height:190px;object-fit:cover;display:block}
+    .meta{padding:14px}
+    .meta h3{margin:0 0 6px 0;color:var(--blue);font-size:18px}
+    .meta p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Contact buttons */
+    .contact-area{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+    .contact-buttons{display:flex;flex-direction:column;gap:12px;min-width:260px}
+    .contact-btn{display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:40px;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,0.12);white-space:normal;overflow-wrap:break-word;word-break:break-all}
+    .contact-btn i{font-size:20px}
+    .ig{background:linear-gradient(90deg,#E44B60,#C13584)}
+    .email{background:#0072C6}
+    .wa{background:#25D366}
+
+    /* Map */
+    .map-box{flex:1;min-width:320px}
+    .map-box iframe{width:100%;height:300px;border:0;border-radius:12px}
+
+    /* Project detail */
+    #project-detail{display:none;background:#fff;padding:26px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.08);margin-top:22px}
+    #project-detail .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+    #project-detail img{width:100%;height:auto;border-radius:10px;object-fit:cover}
+    #project-detail h2{margin-top:0;color:var(--blue)}
+    #project-detail .back-btn{display:inline-block;margin-top:14px;padding:10px 16px;background:var(--gold);color:#fff;border-radius:8px;text-decoration:none;font-weight:700}
+
+    /* Gallery */
+    .gallery{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+    .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;box-shadow:0 6px 12px rgba(0,0,0,.12);cursor:pointer;transition:transform .2s}
+    .gallery img:hover{transform:scale(1.03)}
+
+    /* Floating WA */
+    .wa-float{position:fixed;right:20px;bottom:20px;background:#25D366;color:#fff;padding:12px 16px;border-radius:999px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.18);z-index:140}
+
+    /* Footer */
+    footer{background:var(--dark);color:#ccc;padding:28px;text-align:center;margin-top:36px;border-top:3px solid var(--gold)}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hero-content h1{font-size:34px}
+      .hero-content p{width:100%}
+      #project-detail .detail-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo-.png" alt="Logo">
+    <div class="text-title">PT. Jaya Andara Indonesia</div>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Selamat Datang di<br>PT. Jaya Andara Indonesia</h1>
+      <p>Developer terpercaya sejak 2024 — menghadirkan perumahan berkualitas, lokasi strategis, dan investasi terbaik.</p>
+      <a class="btn" href="#projects">Lihat Projects</a>
+    </div>
+  </section>
+
+  <!-- ABOUT (FIXED) -->
+  <section id="about" class="container">
+    <div class="section-title">Tentang Kami</div>
+
+    <div class="about-single">
+      <p>
+        PT. Jaya Andara Indonesia adalah perusahaan pengembang properti yang berdiri sejak 2024,
+        berfokus pada pembangunan hunian berkualitas dengan konsep modern, aman, dan bernilai investasi tinggi.
+        Kami mengutamakan kualitas, legalitas, dan pengerjaan profesional.
+      </p>
+
+      <h3>Visi Perusahaan</h3>
+      <p>
+        Menjadi pengembang properti terpercaya yang menghadirkan hunian modern, berkualitas,
+        dan bernilai investasi tinggi bagi masyarakat Indonesia.
+      </p>
+
+      <h3>Misi Kami</h3>
+      <ul>
+        <li>Membangun perumahan dengan standar konstruksi terbaik.</li>
+        <li>Menyediakan hunian yang aman, nyaman, dan ramah keluarga.</li>
+        <li>Mengutamakan legalitas yang jelas dan proses pembangunan profesional.</li>
+        <li>Memberikan nilai investasi jangka panjang bagi konsumen.</li>
+        <li>Menghadirkan lokasi yang strategis dengan harga yang kompetitif.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="container">
+    <div class="section-title">Project Kami</div>
+
+    <div class="projects">
+      <div class="project-item" onclick="openProjectDetail()">
+        <img src="andara2.png" alt="Andara Village">
+        <div class="meta">
+          <h3>Andara Village</h3>
+          <p style="color:var(--muted)">Tanjung Barat — Jakarta Selatan — 2025</p>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <img src="projects/p2.jpg" alt="Project 2">
+        <div class="meta"><h3>Project 2</h3><p style="color:var(--muted)">Segera hadir</p></div>
+      </div>
+
+      <div class="project-item">
+        <img src="projects/p3.jpg" alt="Project 3">
+        <div class="meta"><h3>Project 3</h3><p style="color:var(--muted)">Segera hadir</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT DETAIL -->
+  <section id="project-detail" class="container" aria-hidden="true" style="display:none">
+
+  <div class="section-title">Andara Village</div>
+
+  <!-- FOTO UTAMA FULL WIDTH -->
+  <img src="andara2.png" 
+       alt="Andara main"
+       style="width:100%;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.15);margin-bottom:22px">
+
+  <!-- SPESIFIKASI -->
+  <div style="background:#fff;padding:22px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08)">
+
+    <h2 style="color:var(--blue);margin-top:0">Spesifikasi & Info</h2>
+
+    <h3>📍 Lokasi</h3>
+    <p>Jl. Gintung, Jakarta Selatan</p>
+
+    <h3>📐 Spesifikasi Bangunan</h3>
+    <ul style="margin-left:18px">
+      <li>Pondasi: Batu kali</li>
+      <li>Struktur: Beton bertulang</li>
+      <li>Dinding: Bata ringan</li>
+      <li>Lantai: Granit 60×60</li>
+      <li>Atap: Baja ringan + genteng metal</li>
+      <li>Plafon: Gypsum</li>
+      <li>Kusen: Aluminium</li>
+      <li>Listrik: 2200 VA</li>
+      <li>Air: Jetpump / PDAM</li>
+    </ul>
+
+    <h3>🏡  Tipe Rumah</h3>
+    <h3>2 Lantai</h3>
+    <ul style="margin-left:18px">
+      <li>LT: 60 m²</li>
+      <li>LB: 120 m²</li>
+      <li>2 Kamar Tidur • 2 Kamar Mandi • Carport</li>
+    </ul>
+
+
+    <!-- BROSUR -->
+    <a href="brosur-andara.pdf" target="_blank"
+       style="display:inline-block;margin-top:16px;padding:10px 18px;background:var(--gold);color:#fff;border-radius:8px;text-decoration:none;font-weight:700">
+      📄 Download Brosur
+    </a>
+
+    <!-- MAP -->
+    <div style="margin-top:20px; border-radius:12px; overflow:hidden;">
+      <iframe  
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126899.71161769924!2d106.70376344335938!3d-6.31407099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed00239be69d%3A0x3b06a4345e5ba8f5!2sAndara%20Village!5e0!3m2!1sid!2sid!4v1764384844978!5m2!1sid!2sid"  
+        width="100%"  
+        height="250"  
+        style="border:0;"  
+        allowfullscreen  
+        loading="lazy">
+      </iframe>
+    </div>
+
+  </div>
+
+  <!-- GALERI -->
+  <h3 style="margin-top:26px">📸 Galeri Foto</h3>
+  <div class="gallery">
+    <img src="ANDARA.jpg">
+    <img src="andara4.JPG">
+    <img src="andara3.jpg">
+    <img src="andara5.jpg">
+    <img src="andara6.png">
+  </div>
+
+</section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <div class="section-title">Kontak Kami</div>
+
+    <div class="contact-area">
+      <div class="contact-buttons">
+        <a class="contact-btn ig" href="https://instagram.com/jayaandaraindonesia" target="_blank"><i class="fab fa-instagram"></i> @jayaandaraindonesia</a>
+        <a class="contact-btn email" href="mailto:ptjayaandaraindonesia@gmail.com"><i class="fa-solid fa-envelope"></i> ptjayaandaraindonesia@gmail.com</a>
+        <a class="contact-btn wa" href="https://wa.me/6282258260596" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Kami</a>
+      </div>
+
+      <div class="map-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4168916428944!2d106.88506330293407!3d-6.340015051687737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed00675d4267%3A0x390f9bb152cba940!2sPT%20jaya%20Andara%20Indonesia!5e0!3m2!1sid!2sid!4v1764304428411!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2025 PT. Jaya Andara Indonesia — Trusted Developer Property</footer>
+
+<a class="wa-float" href="https://wa.me/6282258260596" target="_blank"> WhatsApp</a>
+
+<script>
+  function openProjectDetail(){
+    const detail = document.getElementById('project-detail');
+    detail.style.display = 'block';
+    detail.setAttribute('aria-hidden','false');
+    setTimeout(()=> location.href='#project-detail', 40);
+  }
+
+  function closeProjectDetail(e){
+    if(e) e.preventDefault();
+    const detail = document.getElementById('project-detail');
+    detail.style.display = 'none';
+    detail.setAttribute('aria-hidden','true');
+    location.href = '#projects';
+  }
+
+  document.addEventListener('click', function(e){
+    if(e.target.matches('.gallery img')){
+      window.open(e.target.src, '_blank');
+    }
+  });
+</script>
+
+</body>
+</html>
